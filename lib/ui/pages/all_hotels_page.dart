@@ -5,10 +5,7 @@ import '../../logic/main_cubit.dart';
 import '../widgets/hotel_widget.dart';
 
 class AllHotelsPage extends StatefulWidget {
-  const AllHotelsPage({super.key, required this.icon, required this.label});
-
-  final Icon icon;
-  final String label;
+  const AllHotelsPage({super.key});
 
   @override
   State<AllHotelsPage> createState() => _AllHotelsPageState();

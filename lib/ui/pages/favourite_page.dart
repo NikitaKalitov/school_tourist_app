@@ -7,10 +7,7 @@ import '../../logic/main_cubit.dart';
 import '../widgets/favourite_widget.dart';
 
 class FavouritePage extends StatefulWidget {
-  const FavouritePage({super.key, required this.icon, required this.label});
-
-  final Icon icon;
-  final String label;
+  const FavouritePage({super.key});
 
   @override
   State<FavouritePage> createState() => _FavouritePageState();

@@ -18,10 +18,10 @@ const List<String> _labels = [
   'Favourite',
 ];
 
-List<Widget> _pages = [
-  AllHotelsPage(icon: _icons[0], label: _labels[0]),
-  AllPlacesPage(icon: _icons[1], label: _labels[1]),
-  FavouritePage(icon: _icons[2], label: _labels[2]),
+List<Widget> _pages = const [
+  AllHotelsPage(),
+  AllPlacesPage(),
+  FavouritePage(),
 ];
 
 List<BottomNavigationBarItem> _bottomNavBarItems() {

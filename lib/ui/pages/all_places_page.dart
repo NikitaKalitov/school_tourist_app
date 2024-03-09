@@ -5,10 +5,7 @@ import '../../logic/main_cubit.dart';
 import '../widgets/place_widget.dart';
 
 class AllPlacesPage extends StatefulWidget {
-  const AllPlacesPage({super.key, required this.icon, required this.label});
-
-  final Icon icon;
-  final String label;
+  const AllPlacesPage({super.key});
 
   @override
   State<AllPlacesPage> createState() => _AllPlacesPageState();
