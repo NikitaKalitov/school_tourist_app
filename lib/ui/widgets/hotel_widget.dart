@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:school_2_dasha_eve/ui/widgets/rating_widget.dart';
+import 'package:school_2_dasha_eve/ui/widgets/views_widget.dart';
 
 import '../../data/models/hotel_model.dart';
 import '../../logic/main_cubit.dart';
@@ -24,9 +26,9 @@ class _HotelWidgetState extends State<HotelWidget> {
       _HotelImageWidget(image: widget.hotel.image),
       _HotelTitleWidget(title: widget.hotel.title),
       _HotelAddressWidget(address: widget.hotel.address),
-      const _HotelRatingAndViewsWidget(children: [
-        _HotelRatingWidget(),
-        _HotelViewsWidget(),
+      _HotelRatingAndViewsWidget(children: [
+        RatingWidget(rating: widget.hotel.rating),
+        ViewsWidget(views: widget.hotel.views),
       ]),
       _HotelFavIconWidget(hotel: widget.hotel),
     ]);
@@ -127,26 +129,9 @@ class _HotelRatingAndViewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: children,
     );
-  }
-}
-
-class _HotelRatingWidget extends StatelessWidget {
-  const _HotelRatingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
-  }
-}
-
-class _HotelViewsWidget extends StatelessWidget {
-  const _HotelViewsWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
   }
 }
 

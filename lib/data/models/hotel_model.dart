@@ -4,6 +4,10 @@ class Hotel {
   String title;
   String address;
   String phone;
+  String rating;
+  String views;
+  double ratingDouble;
+  int viewsInt;
 
   Hotel({
     required this.id,
@@ -11,6 +15,10 @@ class Hotel {
     required this.title,
     required this.address,
     required this.phone,
+    required this.rating,
+    required this.views,
+    required this.ratingDouble,
+    required this.viewsInt,
   });
 
   static Hotel fromMap(Map<String, dynamic> map) {
@@ -20,6 +28,10 @@ class Hotel {
       title: map['title'],
       address: map['address'],
       phone: map['phone'],
+      rating: map['rating'],
+      views: map['views'],
+      ratingDouble: double.parse(map['rating'].replaceAll(',', '.')),
+      viewsInt: int.parse(map['views']),
     );
   }
 
@@ -30,6 +42,8 @@ class Hotel {
       'title': title,
       'address': address,
       'phone': phone,
+      'rating': rating,
+      'views': views,
     };
     return hotelAsMap;
   }

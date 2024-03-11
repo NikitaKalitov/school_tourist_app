@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:school_2_dasha_eve/ui/widgets/rating_widget.dart';
+import 'package:school_2_dasha_eve/ui/widgets/views_widget.dart';
 
 import '../../data/models/place_model.dart';
 import '../../logic/main_cubit.dart';
@@ -24,9 +26,9 @@ class _PlaceWidgetState extends State<PlaceWidget> {
       _PlaceImageWidget(image: widget.place.image),
       _PlaceTitleWidget(title: widget.place.title),
       _PlaceDescriptionWidget(description: widget.place.description),
-      const _PlaceRatingAndViewsWidget(children: [
-        _PlaceRatingWidget(),
-        _PlaceViewsWidget(),
+      _PlaceRatingAndViewsWidget(children: [
+        RatingWidget(rating: widget.place.rating),
+        ViewsWidget(views: widget.place.views),
       ]),
       _PlaceFavIconWidget(place: widget.place),
     ]);
@@ -127,26 +129,9 @@ class _PlaceRatingAndViewsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: children,
     );
-  }
-}
-
-class _PlaceRatingWidget extends StatelessWidget {
-  const _PlaceRatingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
-  }
-}
-
-class _PlaceViewsWidget extends StatelessWidget {
-  const _PlaceViewsWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
   }
 }
 

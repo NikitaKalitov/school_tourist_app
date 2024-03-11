@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:school_2_dasha_eve/data/storage/storage_provider.dart';
 
 import '../../logic/main_cubit.dart';
 import 'all_hotels_page.dart';
@@ -45,6 +46,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    // SPrefProvider.removeAllData().then((value) {
+    //   context.read<MainCubit>().initCubit();
+    // });
     context.read<MainCubit>().initCubit();
   }
 
