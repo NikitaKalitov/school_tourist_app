@@ -17,6 +17,8 @@ class MainCubit extends Cubit<MainCubitState> {
           allPlaces: [],
           favPlaces: [],
           favHotels: [],
+          hotelsSortPattern: 'views desc',
+          placesSortPattern: 'views desc',
         ));
 
   void initCubit() async {
@@ -29,6 +31,69 @@ class MainCubit extends Cubit<MainCubitState> {
       favHotels: favHotels,
       favPlaces: favPlaces,
     ));
+    print('emit');
+    sortHotels(state.hotelsSortPattern!);
+    sortPlaces(state.placesSortPattern!);
+  }
+
+  void sortHotels(String pattern) {
+    List<Hotel> listOfHotels = state.allHotels!.toList();
+    switch(pattern) {
+      case 'views desc':
+        listOfHotels.sort((a, b) {
+          return a.viewsInt.compareTo(b.viewsInt);
+        });
+        listOfHotels = listOfHotels.reversed.toList();
+        break;
+      case 'views asc':
+        listOfHotels.sort((a, b) {
+          return a.viewsInt.compareTo(b.viewsInt);
+        });
+        break;
+      case 'rating desc':
+        listOfHotels.sort((a, b) {
+          return a.ratingDouble.compareTo(b.ratingDouble);
+        });
+        listOfHotels = listOfHotels.reversed.toList();
+        break;
+      case 'rating asc':
+        listOfHotels.sort((a, b) {
+          return a.ratingDouble.compareTo(b.ratingDouble);
+        });
+        break;
+    }
+    emit(state.copyWith(allHotels: listOfHotels, hotelsSortPattern: pattern));
+    print('emit');
+  }
+
+  void sortPlaces(String pattern) {
+    List<Place> listOfPlaces = state.allPlaces!.toList();
+    switch(pattern) {
+      case 'views desc':
+        listOfPlaces.sort((a, b) {
+          return a.viewsInt.compareTo(b.viewsInt);
+        });
+        listOfPlaces = listOfPlaces.reversed.toList();
+        break;
+      case 'views asc':
+        listOfPlaces.sort((a, b) {
+          return a.viewsInt.compareTo(b.viewsInt);
+        });
+        break;
+      case 'rating desc':
+        listOfPlaces.sort((a, b) {
+          return a.ratingDouble.compareTo(b.ratingDouble);
+        });
+        listOfPlaces = listOfPlaces.reversed.toList();
+        break;
+      case 'rating asc':
+        listOfPlaces.sort((a, b) {
+          return a.ratingDouble.compareTo(b.ratingDouble);
+        });
+        break;
+    }
+    emit(state.copyWith(allPlaces: listOfPlaces, placesSortPattern: pattern));
+    print('emit');
   }
 
   void addOrRemoveFav(var object) {
@@ -79,6 +144,7 @@ class MainCubit extends Cubit<MainCubitState> {
     List<Hotel> favHotels = [...state.favHotels!, hotel];
     await SPrefProvider.saveFavHotels(favHotels);
     emit(state.copyWith(favHotels: favHotels));
+    print('emit');
   }
 
   void _removeHotelFromFav(Hotel hotel) async {
@@ -86,6 +152,7 @@ class MainCubit extends Cubit<MainCubitState> {
     favHotels.removeWhere((element) => element.id == hotel.id);
     await SPrefProvider.saveFavHotels(favHotels);
     emit(state.copyWith(favHotels: favHotels));
+    print('emit');
   }
 
   void _addOrRemoveFavPlace(Place place) {
@@ -100,6 +167,7 @@ class MainCubit extends Cubit<MainCubitState> {
     List<Place> favPlaces = [...state.favPlaces!, place];
     await SPrefProvider.saveFavPlaces(favPlaces);
     emit(state.copyWith(favPlaces: favPlaces));
+    print('emit');
   }
 
   void _removePlaceFromFav(Place place) async {
@@ -107,6 +175,7 @@ class MainCubit extends Cubit<MainCubitState> {
     favPlaces.removeWhere((element) => element.id == place.id);
     await SPrefProvider.saveFavPlaces(favPlaces);
     emit(state.copyWith(favPlaces: favPlaces));
+    print('emit');
   }
 }
 
@@ -116,6 +185,8 @@ class MainCubitState {
   List<Hotel>? favHotels;
   List<Place>? allPlaces;
   List<Place>? favPlaces;
+  String? hotelsSortPattern;
+  String? placesSortPattern;
 
   MainCubitState({
     this.appStatus,
@@ -123,6 +194,8 @@ class MainCubitState {
     this.allPlaces,
     this.favHotels,
     this.favPlaces,
+    this.hotelsSortPattern,
+    this.placesSortPattern,
   });
 
   MainCubitState copyWith({
@@ -131,6 +204,8 @@ class MainCubitState {
     List<Hotel>? favHotels,
     List<Place>? allPlaces,
     List<Place>? favPlaces,
+    String? hotelsSortPattern,
+    String? placesSortPattern,
   }) {
     return MainCubitState(
       appStatus: appStatus ?? this.appStatus,
@@ -138,6 +213,8 @@ class MainCubitState {
       allPlaces: allPlaces ?? this.allPlaces,
       favHotels: favHotels ?? this.favHotels,
       favPlaces: favPlaces ?? this.favPlaces,
+      hotelsSortPattern: hotelsSortPattern ?? this.hotelsSortPattern,
+      placesSortPattern: placesSortPattern ?? this.placesSortPattern,
     );
   }
 }

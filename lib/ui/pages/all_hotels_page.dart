@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/main_cubit.dart';
 import '../widgets/hotel_widget.dart';
+import '../widgets/sort_widget.dart';
 
 class AllHotelsPage extends StatefulWidget {
   const AllHotelsPage({super.key});
@@ -19,9 +20,18 @@ class _AllHotelsPageState extends State<AllHotelsPage> {
         return SingleChildScrollView(
           key: const PageStorageKey<String>('allHotels'),
           child: Column(
-            children: state.allHotels!.map((e) {
-              return HotelWidget(hotel: e);
-            }).toList(),
+            children: [
+              SortWidget(
+                valueKey: const ValueKey('hotels'),
+                currentItem: state.hotelsSortPattern!,
+                function: (String item) {
+                  context.read<MainCubit>().sortHotels(item);
+                },
+              ),
+              ...state.allHotels!.map((e) {
+                return HotelWidget(hotel: e);
+              }).toList(),
+            ],
           ),
         );
       },

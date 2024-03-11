@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/main_cubit.dart';
 import '../widgets/place_widget.dart';
+import '../widgets/sort_widget.dart';
 
 class AllPlacesPage extends StatefulWidget {
   const AllPlacesPage({super.key});
@@ -19,9 +20,18 @@ class _AllPlacesPageState extends State<AllPlacesPage> {
         return SingleChildScrollView(
           key: const PageStorageKey<String>('allPlaces'),
           child: Column(
-            children: state.allPlaces!.map((e) {
-              return PlaceWidget(place: e);
-            }).toList(),
+            children: [
+              SortWidget(
+                valueKey: const ValueKey('places'),
+                currentItem: state.placesSortPattern!,
+                function: (String item) {
+                  context.read<MainCubit>().sortPlaces(item);
+                },
+              ),
+              ...state.allPlaces!.map((e) {
+                return PlaceWidget(place: e);
+              }).toList(),
+            ],
           ),
         );
       },
