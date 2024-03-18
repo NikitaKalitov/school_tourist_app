@@ -31,7 +31,7 @@ class MainCubit extends Cubit<MainCubitState> {
       favHotels: favHotels,
       favPlaces: favPlaces,
     ));
-    print('emit');
+    print('emit initCubit');
     sortHotels(state.hotelsSortPattern!);
     sortPlaces(state.placesSortPattern!);
   }
@@ -63,7 +63,7 @@ class MainCubit extends Cubit<MainCubitState> {
         break;
     }
     emit(state.copyWith(allHotels: listOfHotels, hotelsSortPattern: pattern));
-    print('emit');
+    print('emit sortHotels');
   }
 
   void sortPlaces(String pattern) {
@@ -93,7 +93,7 @@ class MainCubit extends Cubit<MainCubitState> {
         break;
     }
     emit(state.copyWith(allPlaces: listOfPlaces, placesSortPattern: pattern));
-    print('emit');
+    print('emit sortPlaces');
   }
 
   void addOrRemoveFav(var object) {
@@ -144,7 +144,7 @@ class MainCubit extends Cubit<MainCubitState> {
     List<Hotel> favHotels = [...state.favHotels!, hotel];
     await SPrefProvider.saveFavHotels(favHotels);
     emit(state.copyWith(favHotels: favHotels));
-    print('emit');
+    print('emit _addHotelToFav');
   }
 
   void _removeHotelFromFav(Hotel hotel) async {
@@ -152,7 +152,7 @@ class MainCubit extends Cubit<MainCubitState> {
     favHotels.removeWhere((element) => element.id == hotel.id);
     await SPrefProvider.saveFavHotels(favHotels);
     emit(state.copyWith(favHotels: favHotels));
-    print('emit');
+    print('emit _removeHotelFromFav');
   }
 
   void _addOrRemoveFavPlace(Place place) {
@@ -167,7 +167,7 @@ class MainCubit extends Cubit<MainCubitState> {
     List<Place> favPlaces = [...state.favPlaces!, place];
     await SPrefProvider.saveFavPlaces(favPlaces);
     emit(state.copyWith(favPlaces: favPlaces));
-    print('emit');
+    print('emit _addPlaceToFav');
   }
 
   void _removePlaceFromFav(Place place) async {
@@ -175,7 +175,7 @@ class MainCubit extends Cubit<MainCubitState> {
     favPlaces.removeWhere((element) => element.id == place.id);
     await SPrefProvider.saveFavPlaces(favPlaces);
     emit(state.copyWith(favPlaces: favPlaces));
-    print('emit');
+    print('emit _removePlaceFromFav');
   }
 }
 

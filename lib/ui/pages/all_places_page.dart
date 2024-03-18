@@ -17,22 +17,27 @@ class _AllPlacesPageState extends State<AllPlacesPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainCubitState>(
       builder: (context, state) {
-        return SingleChildScrollView(
-          key: const PageStorageKey<String>('allPlaces'),
-          child: Column(
-            children: [
-              SortWidget(
-                valueKey: const ValueKey('places'),
-                currentItem: state.placesSortPattern!,
-                function: (String item) {
-                  context.read<MainCubit>().sortPlaces(item);
-                },
+        return Stack(
+          children: [
+            SingleChildScrollView(
+              key: const PageStorageKey<String>('allPlaces'),
+              child: Column(
+                children: [
+                  const SizedBox(height: 80),
+                  ...state.allPlaces!.map((e) {
+                    return PlaceWidget(place: e);
+                  }).toList(),
+                ],
               ),
-              ...state.allPlaces!.map((e) {
-                return PlaceWidget(place: e);
-              }).toList(),
-            ],
-          ),
+            ),
+            SortWidget(
+              valueKey: const ValueKey('places'),
+              currentItem: state.placesSortPattern!,
+              function: (String item) {
+                context.read<MainCubit>().sortPlaces(item);
+              },
+            ),
+          ],
         );
       },
     );

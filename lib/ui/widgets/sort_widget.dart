@@ -31,6 +31,7 @@ class _SortWidgetState extends State<SortWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80,
       width: double.infinity,
       padding: const EdgeInsets.all(8.0),
       child: Material(
